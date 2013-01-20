@@ -51,13 +51,20 @@
 			<artifactId>wicket-core</artifactId>
 			<version>${wicket.version}</version>
 		</dependency>
-		<!-- OPTIONAL DEPENDENCY
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-extensions</artifactId>
-			<version>${wicket.version}</version>
-		</dependency>
-		-->
+
+        <dependency>
+            <groupId>de.agilecoders.wicket</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>0.5.0</version>
+        </dependency>
+
+        <!-- OPTIONAL DEPENDENCY
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-extensions</artifactId>
+            <version>${wicket.version}</version>
+        </dependency>
+        -->
 
 		<!-- LOGGING DEPENDENCIES - LOG4J -->
 		<dependency>
@@ -162,6 +169,14 @@
 					<downloadSources>true</downloadSources>
 				</configuration>
 			</plugin>
+
+            <!-- Own stuff -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>1.3.1</version>
+                <inherited>true</inherited>
+            </plugin>
 		</plugins>
 	</build>
 

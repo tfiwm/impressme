@@ -1,5 +1,6 @@
 package de.agilecoders.wicket;
 
+import de.agilecoders.wicket.settings.BootstrapSettings;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
@@ -27,6 +28,12 @@ public class WicketApplication extends WebApplication
 	{
 		super.init();
 
-		// add your configuration here
+        BootstrapSettings settings = new BootstrapSettings();
+        settings.minify(true); // use minimized version of all bootstrap references
+
+        Bootstrap.install(this, settings);
+
+
+        // add your configuration here
 	}
 }
