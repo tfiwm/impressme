@@ -4,8 +4,38 @@
 		<meta charset="utf-8" />
 		<title>ImpressMe</title>
 		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" title="Stylesheet" />
+
+        <!-- load the Aloha Editor CSS styles -->
+        <link href="js/libs/aloha/css/aloha.css" rel="stylesheet" type="text/css" />
+
+        <!-- load the bootstrap styles -->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen" title="Stylesheet" />
+
+
+        <!-- the jQuery used by aloha -->
+        <script type="text/javascript" src="js/libs/aloha/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="js/libs/aloha/aloha-jquery-noconflict.js"></script>
+
+        <!-- load require.js and the main configuration -->
         <script type="text/javascript" src="js/libs/require.js" data-main="js/main"></script>
+
+        <!-- load the Aloha Editor core and some plugins -->
+        <script src="js/libs/aloha/aloha.min.js" data-aloha-plugins="
+            common/ui,
+            common/format,
+            common/table,
+            common/list,
+            common/link,
+            common/highlighteditables,
+            common/block,
+            common/image,
+            common/contenthandler,
+            common/paste,
+            common/characterpicker,
+            common/commands,
+            extra/flag-icons,
+            common/abbr">
+        </script>
 	</head>
 	<body>
         <div wicket:id="navigation"></div>
