@@ -19,7 +19,7 @@ define(
             el: $('.slide-content'),
 
             initialize: function () {
-                _.bindAll(this, 'render', 'showSlide');
+                _.bindAll(this, 'render', 'unrender', 'showSlide');
             },
 
             render: function () {
@@ -27,8 +27,18 @@ define(
             },
 
             showSlide: function (slideModel) {
+                if (this.model !== undefined) {
+                    this.model.unbind("change", this.render);
+                    this.model.unbind("destroy", this.unrender);
+                }
+                slideModel.bind('change', this.render);
+                slideModel.bind('destroy', this.unrender);
                 this.model = slideModel;
-                this.render();
+            },
+
+            unrender: function () {
+                this.model = undefined;
+                $(this.el).empty();
             }
         });
 
