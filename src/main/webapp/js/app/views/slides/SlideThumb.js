@@ -5,7 +5,7 @@
  * Time: 18:06
  */
 define(
-    ['jquery', 'underscore', 'backbone', 'mustache', 'text!templates/slides/Slide.mu'],
+    ['jquery', 'underscore', 'backbone', 'mustache', 'text!templates/slides/SlideThumb.mu'],
     function ($, _, Backbone, Mustache, template) {
 
         var SlideView = Backbone.View.extend({
@@ -13,7 +13,8 @@ define(
             className: 'slide',
 
             events: {
-                'click .js_remove-slide': 'remove'
+                'click .js_remove-slide': 'remove',
+                'click .slide_number': 'select'
             },
 
             initialize: function () {
@@ -25,6 +26,11 @@ define(
 
             render: function () {
                 $(this.el).html(Mustache.to_html(template, this.model.attributes));
+                if (this.model.get("selected") === true) {
+                    this.$el.addClass("is-selected");
+                } else {
+                    this.$el.removeClass("is-selected");
+                }
                 return this;
             },
 
@@ -34,6 +40,12 @@ define(
 
             remove: function () {
                 this.model.destroy();
+            },
+
+            select: function () {
+                this.model.set({
+                    selected: true
+                });
             }
         });
 

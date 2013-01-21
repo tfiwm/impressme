@@ -10,7 +10,8 @@ define(
 
         var SlidesCollection = Backbone.Model.extend({
             defaults: {
-                number: 0
+                number: 0,
+                selected: false
             }
         });
 

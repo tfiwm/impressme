@@ -11,6 +11,9 @@
 .slide:hover {
   border-color: #8ec6f0;
 }
+.slide.is-selected {
+    border-color: #b50000;
+}
 .slide_close {
   display: none;
   position: absolute;

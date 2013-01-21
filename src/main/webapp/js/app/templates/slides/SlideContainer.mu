@@ -1,1 +1,0 @@
-<button id="js_add-slide">Add Slide</button>

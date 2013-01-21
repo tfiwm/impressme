@@ -9,13 +9,11 @@ define(
         'jquery',
         'underscore',
         'backbone',
-        'mustache',
-        'text!templates/slides/SlideContainer.mu',
         'collections/slides/SlidesCollection',
-        'views/slides/Slide',
+        'views/slides/SlideThumb',
         'models/slides/Slide'
     ],
-    function ($, _, Backbone, Mustache, template, SlidesCollection, SlideView, SlideModel) {
+    function ($, _, Backbone, SlidesCollection, SlideView, SlideModel) {
 
         var SlideContainer = Backbone.View.extend({
             el: $('.slide-container'),
@@ -25,11 +23,12 @@ define(
             },
 
             initialize: function () {
-                _.bindAll(this, 'render', 'removeSlide', 'addSlide', 'appendSlide');
+                _.bindAll(this, 'render', 'removeSlide', 'addSlide', 'appendSlide', 'changeSelection');
 
                 this.collection = new SlidesCollection();
                 this.collection.bind("remove", this.removeSlide);
                 this.collection.bind("add", this.appendSlide);
+                this.collection.bind("change:selected", this.changeSelection);
 
                 this.counter = 0;
 
@@ -39,10 +38,14 @@ define(
             render: function () {
                 var self = this;
 
-                $(this.el).append(Mustache.to_html(template));
-                _(this.collection.models).each(function (slide) { // in case collection is not empty
-                    self.addSlide(slide);
-                }, this);
+                if (this.collection.models.length > 1) {
+                    _(this.collection.models).each(function (slide) { // in case collection is not empty
+                        self.addSlide(slide);
+                    }, this);
+                }
+                if (this.collection.models.length === 0) {
+                    this.addSlide();
+                }
             },
 
             addSlide: function () {
@@ -60,12 +63,13 @@ define(
                 var slideView = new SlideView({
                     model: slideModel
                 });
+                slideView.on('select', this.changeSelection);
 
                 $(this.el).append(slideView.render().el);
             },
 
             removeSlide: function (slideModel, collection, information) {
-                var i;
+                var i, wasSelected = slideModel.get('selected');
                 this.counter--;
 
                 for (i = collection.models.length - 1; i > information.index - 1; i--) {
@@ -73,9 +77,27 @@ define(
                         number: i + 1
                     });
                 }
+                if (wasSelected) {
+                    this.changeSelection(slideModel);
+                }
+            },
+
+            changeSelection: function (slideModel) {
+                var i;
+
+                if (slideModel.changed.selected === true) {
+                    this.trigger('selectSlide', slideModel);
+                    for (i = this.collection.models.length; i--;) {
+                        var model = this.collection.at(i);
+                        if(slideModel !== model) {
+                            model.set({
+                                selected: false
+                            });
+                        }
+                    }
+                }
             }
         });
-
 
         return SlideContainer;
     }

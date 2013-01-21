@@ -5,13 +5,32 @@
  * Time: 17:09
  */
 
-define(['jquery', 'underscore', 'backbone', 'views/slides/SlideContainer'], function ($, _, Backbone, SlideContainer) {
+/**
+ * SlideContainer is a singleton instance
+ */
+define(
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'views/slides/SlideContainer',
+        'views/slides/SlideContent'
+    ],
 
-    function initialize() {
-        var slideContainer = new SlideContainer();
+    function ($, _, Backbone, SlideContainer, SlideContent) {
+
+        function initialize() {
+            var slideContainer = new SlideContainer(),
+                slideContent = new SlideContent();
+
+            slideContainer.on('selectSlide', function (slideModel) {
+                slideContent.showSlide(slideModel);
+            });
+        }
+
+        return {
+            initialize: initialize
+        };
     }
+);
 
-    return {
-        initialize: initialize
-    };
-});
