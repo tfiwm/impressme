@@ -40,7 +40,7 @@ define(
 
                 if (this.collection.models.length > 1) {
                     _(this.collection.models).each(function (slide) { // in case collection is not empty
-                        self.addSlide(slide);
+                        self.appendSlide(slide);
                     }, this);
                 }
                 if (this.collection.models.length === 0) {

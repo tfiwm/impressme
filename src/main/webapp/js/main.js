@@ -19,7 +19,7 @@ require.config({
 
         // Plugins
         // -------
-        "bootstrap": "libs/plugins/bootstrap.min",
+        "bootstrap": "libs/bootstrap.min",
         "text": "libs/plugins/text",
 
         // Application Folders

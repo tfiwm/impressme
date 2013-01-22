@@ -5,17 +5,29 @@
  * Time: 18:06
  */
 define(
-    ['jquery', 'underscore', 'backbone', 'models/slides/Slide'],
-    function ($, _, Backbone) {
+    ['jquery', 'underscore', 'backbone', 'collections/slides/SlideElementsCollection'],
+    function ($, _, Backbone, SlideElementsCollection) {
 
-        var SlidesCollection = Backbone.Model.extend({
+        var SlideModel = Backbone.Model.extend({
             defaults: {
+                /**
+                 * Slice number
+                 */
                 number: 0,
-                selected: false
+
+                /**
+                 * Is slice selected
+                 */
+                selected: false,
+
+                /**
+                 * All slide elements (text, tables, ...)
+                 */
+                elements: new SlideElementsCollection()
             }
         });
 
 
-        return SlidesCollection;
+        return SlideModel;
     }
 );
