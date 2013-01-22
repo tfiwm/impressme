@@ -22,6 +22,7 @@ define(
 
             render: function () {
                 $(this.el).html(Mustache.to_html(template, this.model.attributes));
+                this.model.set('alohaId', Aloha.jQuery(this.el).aloha().attr('id'), { silent: true });
                 return this;
             },
 

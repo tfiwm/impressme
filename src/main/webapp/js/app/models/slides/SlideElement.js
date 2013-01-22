@@ -11,7 +11,8 @@ define(
         var Model = Backbone.Model.extend({
 
             defaults: {
-                content: '<b>Content of this Element</b>'
+                content: '<b>Content of this Element</b>',
+                alohaId: null
             }
 
         });

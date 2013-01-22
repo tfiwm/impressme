@@ -9,6 +9,11 @@ define(
     function ($, _, Backbone, SlideElementsCollection) {
 
         var SlideModel = Backbone.Model.extend({
+
+            initialize: function () {
+                this.set("elements", new SlideElementsCollection());
+            },
+
             defaults: {
                 /**
                  * Slice number
@@ -23,7 +28,7 @@ define(
                 /**
                  * All slide elements (text, tables, ...)
                  */
-                elements: new SlideElementsCollection()
+                elements: null
             }
         });
 
