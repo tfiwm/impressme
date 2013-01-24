@@ -11,6 +11,8 @@ require.config({
         // --------------
         "jquery": "libs/jquery.1.9.0.min",
 
+        "jqueryui": "libs/jquery-ui-1.10.0.min",
+
         "underscore": "libs/underscore.min",
 
         "backbone": "libs/backbone.min",

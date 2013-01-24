@@ -18,12 +18,10 @@ define(
         var SlideContainer = Backbone.View.extend({
             el: $('.slide-container'),
 
-            events: {
-                'click #js_add-slide': 'addSlide'
-            },
-
             initialize: function () {
                 _.bindAll(this, 'render', 'removeSlide', 'addSlide', 'appendSlide', 'changeSelection');
+
+                $('.js_add-slide').on('click', this.addSlide);
 
                 this.collection = new SlidesCollection();
                 this.collection.bind("remove", this.removeSlide);

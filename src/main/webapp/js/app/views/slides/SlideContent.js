@@ -21,8 +21,6 @@ define(
             el: $('.slide-content'),
 
             initialize: function () {
-                var self = this;
-
                 _.bindAll(
                     this,
                     'render',
@@ -31,25 +29,16 @@ define(
                     'appendElement',
                     'removeElement',
                     'addSlideElement',
-                    'updateModel',
                     'destroyAlohaElements'
                 );
 
-                $('#js_add-slide-element').on('click', this.addSlideElement);
-
-                Aloha.bind('aloha-smart-content-changed', function (event, data) {
-                    self.updateModel(data.editable.obj);
-                });
-
-                Aloha.bind('aloha-editable-destroyed', function (event, editable) {
-                    console.log("destroyed", editable);
-                });
+                $('.js_add-slide-element').on('click', this.addSlideElement);
             },
 
             render: function () {
                 var self = this;
 
-                this.destroyAlohaElements();
+//                this.destroyAlohaElements();
                 if (this.collection.models.length > 0) {
                     _(this.collection.models).each(function (slideElement) { // in case collection is not empty
                         self.appendElement(slideElement);
@@ -78,7 +67,7 @@ define(
             unrender: function () {
                 this.model = undefined;
                 this.collection = undefined;
-                this.destroyAlohaElements();
+//                this.destroyAlohaElements();
             },
 
             destroyAlohaElements: function () {
@@ -102,16 +91,6 @@ define(
 
             removeElement: function () {
                 console.log('removed Element');
-            },
-
-            updateModel: function ($contentElement) {
-                var id = $contentElement.attr("id");
-
-                _(this.collection.models).each(function (slideElement) { // in case collection is not empty
-                    if (id === slideElement.get('alohaId')) {
-                        slideElement.set('content', $contentElement.html(), { silent: true });
-                    }
-                }, this);
             }
         });
 

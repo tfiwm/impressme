@@ -1,6 +1,6 @@
 package de.agilecoders.wicket;
 
-import de.agilecoders.wicket.ui.navigation.Navigation;
+import de.agilecoders.wicket.ui.navigation.NavigationTop;
 import de.agilecoders.wicket.ui.navigation.NavigationActions;
 import de.agilecoders.wicket.ui.navigation.NavigationBottom;
 import de.agilecoders.wicket.ui.slides.SlideContainer;
@@ -14,7 +14,7 @@ public class HomePage extends WebPage {
 	public HomePage(final PageParameters parameters) {
 		super(parameters);
 
-		add(new Navigation("navigation"));
+		add(new NavigationTop("navigation-top"));
         add(new NavigationActions("navigation-actions"));
         add(new NavigationBottom("navigation-bottom"));
         add(new SlideContainer("slide-container"));

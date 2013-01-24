@@ -12,12 +12,13 @@ define(
     [
         'jquery',
         'underscore',
+        'jqueryui',
         'backbone',
         'views/slides/SlideContainer',
         'views/slides/SlideContent'
     ],
 
-    function ($, _, Backbone, SlideContainer, SlideContent) {
+    function ($, _, Jqueryui, Backbone, SlideContainer, SlideContent) {
 
         function initialize() {
             var slideContainer = new SlideContainer(),

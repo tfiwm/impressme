@@ -1,6 +1,8 @@
 package de.agilecoders.wicket.ui.navigation;
 
 import de.agilecoders.wicket.markup.html.bootstrap.navbar.Navbar;
+import org.apache.wicket.markup.head.CssUrlReferenceHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
@@ -10,8 +12,8 @@ import org.apache.wicket.model.Model;
  * Date: 20.01.13
  * Time: 14:41
  */
-public class Navigation extends Panel {
-    public Navigation(String id) {
+public class NavigationTop extends Panel {
+    public NavigationTop(String id) {
         super(id);
 
         Navbar navbar = new Navbar("navigation");
@@ -19,5 +21,12 @@ public class Navigation extends Panel {
         navbar.brandName(Model.of("ImpressMe"));
 
         add(navbar);
+    }
+
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+
+        response.render(new CssUrlReferenceHeaderItem("css/ui/navigation/navigation-top.css", "screen", ""));
     }
 }
