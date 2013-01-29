@@ -54,7 +54,7 @@ define(
 
 
                 /*
-                 * @TODO WTF why the hell we need this damn next tick...
+                 * WTF why the hell we need this damn next tick...
                  * must be something wrong with their implementation on event triggering
                  */
                 window.setTimeout(function () {

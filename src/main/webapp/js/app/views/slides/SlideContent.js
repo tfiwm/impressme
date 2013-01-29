@@ -39,6 +39,7 @@ define(
                 var self = this;
 
 //                this.destroyAlohaElements();
+                console.log(this.collection.models.length);
                 if (this.collection.models.length > 0) {
                     _(this.collection.models).each(function (slideElement) { // in case collection is not empty
                         self.appendElement(slideElement);
@@ -48,26 +49,29 @@ define(
 
             showSlide: function (slideModel) {
                 if (this.model !== undefined) {
-                    this.model.unbind("change", this.render);
+                    this.model.unbind("change:selected", this.render);
                     this.model.unbind("destroy", this.unrender);
                     this.collection.unbind('remove', this.removeElement);
                     this.collection.unbind('add', this.appendElement);
                     this.unrender();
                 }
 
-                slideModel.bind('change:selected', this.render);
-                slideModel.bind('destroy', this.unrender);
                 this.collection = slideModel.get('elements');
                 this.collection.bind("remove", this.removeElement);
                 this.collection.bind("add", this.appendElement);
 
+                slideModel.bind('change:selected', this.render);
+                slideModel.bind('destroy', this.unrender);
+
                 this.model = slideModel;
+                this.render();
             },
 
             unrender: function () {
                 this.model = undefined;
                 this.collection = undefined;
 //                this.destroyAlohaElements();
+                $(this.el).empty();
             },
 
             destroyAlohaElements: function () {
