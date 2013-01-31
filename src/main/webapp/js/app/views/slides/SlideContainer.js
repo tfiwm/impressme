@@ -28,6 +28,8 @@ define(
                 this.collection.bind("add", this.appendSlide);
                 this.collection.bind("change:selected", this.changeSelection);
 
+//                this.collection.fetch();
+
                 this.counter = 0;
 
                 this.render();
@@ -71,7 +73,7 @@ define(
                 this.counter--;
 
                 for (i = collection.models.length - 1; i > information.index - 1; i--) {
-                    collection.models[i].set({
+                    collection.models[i].save({
                         number: i + 1
                     });
                 }

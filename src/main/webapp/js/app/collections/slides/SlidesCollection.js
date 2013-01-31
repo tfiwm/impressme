@@ -5,11 +5,13 @@
  * Time: 18:06
  */
 define(
-    ['jquery', 'underscore', 'backbone', 'models/slides/Slide'],
-    function ($, _, Backbone, Slide) {
+    ['jquery', 'underscore', 'backbone', 'dualstorage', 'models/slides/Slide'],
+    function ($, _, Backbone, DualStorage, Slide) {
 
         var SlidesCollection = Backbone.Collection.extend({
-            model: Slide
+            model: Slide,
+            url: "/slides",
+            local: true
         });
 
 

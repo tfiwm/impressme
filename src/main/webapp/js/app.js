@@ -14,11 +14,12 @@ define(
         'underscore',
         'jqueryui',
         'backbone',
+        'ckeditor',
         'views/slides/SlideContainer',
         'views/slides/SlideContent'
     ],
 
-    function ($, _, Jqueryui, Backbone, SlideContainer, SlideContent) {
+    function ($, _, Jqueryui, Backbone, CKEditor, SlideContainer, SlideContent) {
 
         function initialize() {
             var slideContainer = new SlideContainer(),

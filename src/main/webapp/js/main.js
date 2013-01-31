@@ -9,19 +9,22 @@ require.config({
 
         // Core Libraries
         // --------------
-        "jquery": "libs/jquery.1.9.0.min",
+        "jquery": "libs/jquery.1.9.0",
 
-        "jqueryui": "libs/jquery-ui-1.10.0.min",
+        "jqueryui": "libs/jquery-ui-1.10.0",
 
-        "underscore": "libs/underscore.min",
+        "underscore": "libs/underscore",
 
-        "backbone": "libs/backbone.min",
+        "backbone": "libs/backbone",
+        "dualstorage": "libs/plugins/backbone.dualStorage",
+
+        "ckeditor": "libs/ckeditor/ckeditor",
 
         "mustache": "libs/mustache",
 
         // Plugins
         // -------
-        "bootstrap": "libs/bootstrap.min",
+        "bootstrap": "libs/bootstrap",
         "text": "libs/plugins/text",
 
         // Application Folders
@@ -57,6 +60,10 @@ require.config({
             // Exports the global window.Backbone object
             "exports": "Backbone"
 
+        },
+
+        "ckeditor": {
+            "exports": "CKEDITOR"
         },
 
         "underscore": {

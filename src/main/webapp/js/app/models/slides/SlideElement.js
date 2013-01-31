@@ -12,7 +12,7 @@ define(
 
             defaults: {
                 content: '<b>Content of this Element</b>',
-                alohaId: null
+                editorId: null
             }
 
         });

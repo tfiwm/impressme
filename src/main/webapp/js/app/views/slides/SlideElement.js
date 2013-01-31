@@ -6,8 +6,8 @@
  */
 
 define(
-    ['jquery', 'underscore', 'backbone', 'mustache', 'text!templates/slides/SlideElement.mu'],
-    function ($, _, Backbone, Mustache, template) {
+    ['jquery', 'underscore', 'backbone', 'mustache', 'text!templates/slides/SlideElement.mu', 'ckeditor'],
+    function ($, _, Backbone, Mustache, template, CKEditor) {
 
         var SlideView = Backbone.View.extend({
 
@@ -35,12 +35,15 @@ define(
             },
 
             activateEditor: function () {
-                if (this.model.get('alohaId') === null) {
+                if (!this.editor) {
                     console.log("activateEditor", this.model);
-                    $(this.el).draggable("destroy").addClass('slide-element-selected');
-                    this.model.set('alohaId', Aloha.jQuery(this.el).aloha().attr('id'), { silent: true });
-                    Aloha.bind('aloha-smart-content-changed', this.autosaveChanges);
-//                    Aloha.bind('aloha-editable-deactivated', this.deactivateEditor);
+                    $(this.el).draggable("destroy").addClass('slide-element-selected').attr('contenteditable', true);
+                    this.editor = CKEditor.inline(this.el, {
+                        startupFocus: true,
+                        on: {
+                            blur: this.deactivateEditor
+                        }
+                    });
                 }
             },
 
@@ -48,34 +51,12 @@ define(
                 var self = this;
 
                 console.log(event, editable, "deactivated");
-                this.model.set('alohaId', null, { silent: true });
-                Aloha.unbind('aloha-smart-content-changed', this.autosaveChanges);
-                Aloha.unbind('aloha-editable-deactivated', this.deactivateEditor);
 
+                this.editor.destroy();
+                this.editor = null;
+                $(this.el).removeClass('slide-element-selected')
+                    .draggable().on('dblclick', self.activateEditor);
 
-                /*
-                 * WTF why the hell we need this damn next tick...
-                 * must be something wrong with their implementation on event triggering
-                 */
-                window.setTimeout(function () {
-                    var left = $(self.el).css('left'),
-                        top = $(self.el).css('top'),
-                        $newEl = $('<div></div>').addClass(self.className).html(self.model.get('content'));
-
-                    Aloha.jQuery(self.el).removeClass('slide-element-selected').mahalo();
-
-                    /*
-                     * mahalo is not deleting all events
-                     * this means draggable is not working anymore
-                     *
-                     * need to replace it with a clean element
-                     */
-                    $(self.el).replaceWith($newEl.css({
-                        left: left,
-                        top: top,
-                        position: 'relative'
-                    }).draggable().on('dblclick', self.activateEditor));
-                }, 0);
             },
 
             autosaveChanges: function (event, editable) {

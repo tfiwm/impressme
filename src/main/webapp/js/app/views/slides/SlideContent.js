@@ -28,8 +28,7 @@ define(
                     'showSlide',
                     'appendElement',
                     'removeElement',
-                    'addSlideElement',
-                    'destroyAlohaElements'
+                    'addSlideElement'
                 );
 
                 $('.js_add-slide-element').on('click', this.addSlideElement);
@@ -38,7 +37,6 @@ define(
             render: function () {
                 var self = this;
 
-//                this.destroyAlohaElements();
                 console.log(this.collection.models.length);
                 if (this.collection.models.length > 0) {
                     _(this.collection.models).each(function (slideElement) { // in case collection is not empty
@@ -70,12 +68,7 @@ define(
             unrender: function () {
                 this.model = undefined;
                 this.collection = undefined;
-//                this.destroyAlohaElements();
                 $(this.el).empty();
-            },
-
-            destroyAlohaElements: function () {
-                Aloha.jQuery(this.el).find('.slide-element').mahalo().remove();
             },
 
             addSlideElement: function () {
