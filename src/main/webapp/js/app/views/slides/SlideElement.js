@@ -35,22 +35,24 @@ define(
             },
 
             activateEditor: function () {
+                var self = this;
                 if (!this.editor) {
                     console.log("activateEditor", this.model);
                     $(this.el).draggable("destroy").addClass('slide-element-selected').attr('contenteditable', true);
                     this.editor = CKEditor.inline(this.el, {
                         startupFocus: true,
                         on: {
-                            blur: this.deactivateEditor
+                            blur: function () {
+                                self.autosaveChanges();
+                                self.deactivateEditor();
+                            }
                         }
                     });
                 }
             },
 
-            deactivateEditor: function (event, editable) {
+            deactivateEditor: function () {
                 var self = this;
-
-                console.log(event, editable, "deactivated");
 
                 this.editor.destroy();
                 this.editor = null;
@@ -59,15 +61,9 @@ define(
 
             },
 
-            autosaveChanges: function (event, editable) {
-                if (editable.editable.obj.get(0) === this.el) {
-                    console.log('autosaveChanges', event, editable, this.el);
-                    this.model.set('content', $(this.el).html(), { silent: true });
-
-                    if (editable.triggerType === "blur") {
-                        this.deactivateEditor(event, editable);
-                    }
-                }
+            autosaveChanges: function () {
+                console.log(this.editor.getData());
+                this.model.set('content', this.editor.getData(), { silent: true });
             },
 
             remove: function () {
