@@ -3,6 +3,8 @@
  * User: mtschimev
  * Date: 20.01.13
  * Time: 18:06
+ * 
+ * The SlideThumb in the left navigation
  */
 define(
     ['jquery', 'underscore', 'backbone', 'mustache', 'text!templates/slides/SlideThumb.mu'],
