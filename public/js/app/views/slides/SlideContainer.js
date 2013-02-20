@@ -53,8 +53,14 @@ define(
                 var slide = new SlideModel();
                 this.counter++;
 
-                slide.set({
-                    number: this.counter
+                slide.save({
+                    number: this.counter,
+                    success: function(model, response, options) {
+                        console.log("saved model");
+                    },
+                    error: function(model, xhr, options) {
+                        console.log("error at saving model");
+                    }
                 });
 
                 this.collection.add(slide);

@@ -10,8 +10,7 @@ define(
 
         var SlidesCollection = Backbone.Collection.extend({
             model: Slide,
-            url: "/slides",
-            local: true
+            url: "/slides"
         });
 
 

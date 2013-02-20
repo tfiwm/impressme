@@ -10,6 +10,8 @@ define(
 
         var SlideModel = Backbone.Model.extend({
 
+            url: "/slides",
+
             initialize: function () {
                 this.set("elements", new SlideElementsCollection());
             },
