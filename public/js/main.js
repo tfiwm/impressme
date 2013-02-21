@@ -16,7 +16,7 @@ require.config({
         "underscore": "libs/underscore",
 
         "backbone": "libs/backbone",
-        "dualstorage": "libs/plugins/backbone.dualStorage",
+        //"dualstorage": "libs/plugins/backbone.dualStorage",
 
         "ckeditor": "libs/ckeditor/ckeditor",
 

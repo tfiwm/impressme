@@ -29,7 +29,11 @@ define(
                 this.collection.bind("add", this.appendSlide);
                 this.collection.bind("change:selected", this.changeSelection);
 
-//                this.collection.fetch();
+                this.collection.fetch({
+                    success: function(slides) {
+                        console.log(slides)
+                    }
+                });
 
                 this.counter = 0;
 
@@ -53,14 +57,8 @@ define(
                 var slide = new SlideModel();
                 this.counter++;
 
-                slide.save({
-                    number: this.counter,
-                    success: function(model, response, options) {
-                        console.log("saved model");
-                    },
-                    error: function(model, xhr, options) {
-                        console.log("error at saving model");
-                    }
+                slide.set({
+                    number: this.counter
                 });
 
                 this.collection.add(slide);
