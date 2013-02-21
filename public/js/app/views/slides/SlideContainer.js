@@ -62,6 +62,7 @@ define(
                 });
 
                 this.collection.add(slide);
+//                slide.save();
             },
 
             appendSlide: function (slideModel) {
