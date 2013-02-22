@@ -21,7 +21,7 @@ object Slides extends Controller with MongoController {
   
   def all = Action { request =>
     Async {
-      val qb = QueryBuilder().query(Json.obj( "id" -> "51269ef3713bf0df2d579b25" )).sort( "number" -> SortOrder.Ascending)
+      val qb = QueryBuilder().query(Json.obj( "selected" -> false )).sort( "number" -> SortOrder.Ascending)
 
       collection.find[JsValue]( qb ).toList.map {
         slides => Ok(slides.foldLeft(JsArray(List()))( (obj, slide) => obj ++ Json.arr(slide) ))

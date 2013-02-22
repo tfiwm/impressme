@@ -41,7 +41,11 @@ define(
             },
 
             remove: function () {
-                this.model.destroy();
+                this.model.destroy({
+                    success: function(model) {
+                        console.log("deleted slide with number " + model.get('number'));
+                    }
+                });
             },
 
             select: function () {

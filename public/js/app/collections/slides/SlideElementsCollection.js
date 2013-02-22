@@ -9,7 +9,9 @@ define(
     function ($, _, Backbone, SlideElement) {
 
         var SlidesCollection = Backbone.Collection.extend({
-            model: SlideElement
+            model: SlideElement,
+            url: '/slideelements'
+
         });
 
 

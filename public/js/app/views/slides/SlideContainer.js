@@ -11,15 +11,16 @@ define(
         'underscore',
         'backbone',
         'collections/slides/SlidesCollection',
-        'views/slides/SlideThumb',
-        'models/slides/Slide'
+        'views/slides/SlideThumb'
     ],
-    function (css, $, _, Backbone, SlidesCollection, SlideView, SlideModel) {
+    function (css, $, _, Backbone, SlidesCollection, SlideView) {
 
         var SlideContainer = Backbone.View.extend({
             el: $('.slide-container'),
 
             initialize: function () {
+                var self = this;
+
                 _.bindAll(this, 'render', 'removeSlide', 'addSlide', 'appendSlide', 'changeSelection');
 
                 $('.js_add-slide').on('click', this.addSlide);
@@ -29,40 +30,34 @@ define(
                 this.collection.bind("add", this.appendSlide);
                 this.collection.bind("change:selected", this.changeSelection);
 
-                this.collection.fetch({
-                    success: function(slides) {
-                        console.log(slides)
-                    }
-                });
-
                 this.counter = 0;
 
-                this.render();
+                this.collection.fetch({
+                    success: function(slides) {
+                        self.counter = slides.length
+                        self.render();
+                    }
+                });
             },
 
             render: function () {
                 var self = this;
 
-                if (this.collection.models.length > 1) {
+                if (this.collection.models.length > 0) {
                     _(this.collection.models).each(function (slide) { // in case collection is not empty
                         self.appendSlide(slide);
                     }, this);
-                }
-                if (this.collection.models.length === 0) {
+                } else {
                     this.addSlide();
                 }
             },
 
             addSlide: function () {
-                var slide = new SlideModel();
                 this.counter++;
 
-                slide.set({
+                this.collection.create({
                     number: this.counter
                 });
-
-                this.collection.add(slide);
-//                slide.save();
             },
 
             appendSlide: function (slideModel) {
@@ -79,7 +74,7 @@ define(
                 this.counter--;
 
                 for (i = collection.models.length - 1; i > information.index - 1; i--) {
-                    collection.models[i].save({
+                    collection.models[i].set({
                         number: i + 1
                     });
                 }
@@ -101,6 +96,7 @@ define(
                             });
                         }
                     }
+                    this.collection.sync();
                 }
             }
         });

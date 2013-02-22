@@ -10,6 +10,8 @@ define(
 
         var Model = Backbone.Model.extend({
 
+            url: '/slideelements',
+
             defaults: {
                 content: '<b>Content of this Element</b>',
                 editorId: null
