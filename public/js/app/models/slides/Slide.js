@@ -10,11 +10,11 @@ define(
 
         var SlideModel = Backbone.Model.extend({
 
-            url: "/slides",
+            urlRoot: "/slides",
             idAttribute: '_id',
 
             parse: function(response) {
-                response._id = response._id['$id'];
+                response._id = response._id['$oid'];
 
                 return response;
             },

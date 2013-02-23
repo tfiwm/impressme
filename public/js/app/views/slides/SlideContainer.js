@@ -78,6 +78,7 @@ define(
                         number: i + 1
                     });
                 }
+
                 if (wasSelected) {
                     this.changeSelection(slideModel);
                 }
@@ -91,12 +92,11 @@ define(
                     for (i = this.collection.models.length; i--;) {
                         var model = this.collection.at(i);
                         if(slideModel !== model) {
-                            model.set({
+                            model.save({
                                 selected: false
                             });
                         }
                     }
-                    this.collection.sync();
                 }
             }
         });

@@ -38,7 +38,6 @@ define(
             render: function () {
                 var self = this;
 
-                console.log(this.collection.models.length);
                 if (this.collection.models.length > 0) {
                     _(this.collection.models).each(function (slideElement) { // in case collection is not empty
                         self.appendElement(slideElement);

@@ -43,7 +43,7 @@ define(
             remove: function () {
                 this.model.destroy({
                     success: function(model) {
-                        console.log("deleted slide with number " + model.get('number'));
+
                     }
                 });
             },

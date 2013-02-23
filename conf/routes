@@ -9,9 +9,10 @@ GET     /                           controllers.Application.index
 
 # Slides
 GET     /slides                     controllers.Slides.all
-GET     /slides/{<[0-9]+>id}        controllers.Slides.get
 POST    /slides                     controllers.Slides.create
-PUT     /slides/{<[0-9]+>id}        controllers.Slides.put
+GET     /slides/:id                 controllers.Slides.get(id)
+DELETE  /slides/:id                 controllers.Slides.delete(id)
+PUT     /slides/:id                 controllers.Slides.edit(id)
 
 
 # Map static resources from the /public folder to the /assets URL path
