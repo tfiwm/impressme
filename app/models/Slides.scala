@@ -16,8 +16,7 @@ case class Slide (
     number: Integer,
     elements: String
 )
-// Turn off your mind, relax, and float downstream
-// It is not dying...
+
 object Slide {
   implicit object SlideBSONReader extends BSONReader[Slide] {
     def fromBSON(document: BSONDocument) :Slide = {
@@ -47,7 +46,6 @@ object Slide {
       "number" -> number(),
       "elements" -> text
 
-    //rewrite to Slide
     ) { (id, number, elements) =>
       Slide(
         id.map(new BSONObjectID(_)),
